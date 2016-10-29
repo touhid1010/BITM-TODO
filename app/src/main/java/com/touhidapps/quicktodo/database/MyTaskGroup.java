@@ -1,4 +1,4 @@
-package com.touhidapps.quicktodo.MyDatabase;
+package com.touhidapps.quicktodo.database;
 
 /**
  * Created by Touhid on 10/28/2016.

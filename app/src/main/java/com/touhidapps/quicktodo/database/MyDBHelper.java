@@ -1,4 +1,4 @@
-package com.touhidapps.quicktodo.MyDatabase;
+package com.touhidapps.quicktodo.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
