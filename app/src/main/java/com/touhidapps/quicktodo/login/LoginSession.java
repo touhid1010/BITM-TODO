@@ -66,9 +66,11 @@ public class LoginSession {
 
     public boolean isLogedIn(Context context) {
 
-
-
-        return false;
+        if (context.getSharedPreferences(MY_PREFERENCE_NAME, context.MODE_PRIVATE).getBoolean(MY_PREFERENCE_KEY_SESSION, false)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 

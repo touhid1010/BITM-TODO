@@ -45,6 +45,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         // Make login session
         loginSession = new LoginSession(this, textView_defaultPassword);
+        if (loginSession.isLogedIn(this)) {
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+        }
 
 
     } // End of onCreate

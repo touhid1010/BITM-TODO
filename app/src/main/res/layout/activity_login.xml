@@ -23,5 +23,12 @@
 
     <include layout="@layout/content_login" />
 
+    <Button
+        android:text="Change Password"
+        android:id="@+id/button_changePassword"
+        android:layout_width="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_height="wrap_content" />
+
 
 </android.support.design.widget.CoordinatorLayout>
