@@ -18,7 +18,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     TextView textView_defaultPassword;
     TextInputLayout textInputLayout_password;
     EditText editText_password;
-    Button button_login;
+    Button button_login, button_changePassword;
 
     LoginSession loginSession;
 
@@ -34,10 +34,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         textInputLayout_password = (TextInputLayout) findViewById(R.id.textInputLayout_password);
         editText_password = (EditText) findViewById(R.id.editText_password);
         button_login = (Button) findViewById(R.id.button_login);
+        button_changePassword = (Button) findViewById(R.id.button_changePassword);
         button_login.setOnClickListener(this);
+        button_changePassword.setOnClickListener(this);
 
         // Make login session
         loginSession = new LoginSession(this, textView_defaultPassword);
+
+        /**
+         * if get logged in start home activity
+         */
         if (loginSession.isLoggedIn(this)) {
             startActivity(new Intent(this, MainActivity.class));
             finish();
@@ -60,6 +66,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Toast.makeText(this, "Password Error, Please Try again!", Toast.LENGTH_SHORT).show();
                     editText_password.getText().clear();
                 }
+
+                break;
+
+            case R.id.button_changePassword:
+
 
                 break;
         }

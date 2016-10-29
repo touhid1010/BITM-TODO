@@ -39,20 +39,6 @@ public class LoginSession {
             textView.setText("");
         }
 
-
-        /**
-         * if get loged in start home activity
-         */
-//        if (prefs.getString(MY_PREFERENCE_KEY_PASSWORD, "").equals(ed.getText().toString())) {
-//            context.startActivity(new Intent(this, MainActivity.class));
-//            (Activity)context.finish();
-//        } else {
-//            Toast.makeText(this, "Error Password, Please Try again!", Toast.LENGTH_SHORT).show();
-//            editText_password.getText().clear();
-//        }
-
-        Log.d("touhid1", "onCreate: " + context.getSharedPreferences(MY_PREFERENCE_NAME, context.MODE_PRIVATE).getString(MY_PREFERENCE_KEY_PASSWORD, ""));
-
     }
 
     public boolean setSession(Context context, String password) {
@@ -62,6 +48,7 @@ public class LoginSession {
         } else {
             return false;
         }
+
     }
 
     public boolean isLoggedIn(Context context) {
@@ -71,6 +58,7 @@ public class LoginSession {
         } else {
             return false;
         }
+
     }
 
 
