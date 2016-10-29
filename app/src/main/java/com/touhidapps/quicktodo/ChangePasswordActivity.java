@@ -40,16 +40,42 @@ public class ChangePasswordActivity extends AppCompatActivity {
         button_submitChanePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LoginSession loginSession = new LoginSession();
-                boolean check = loginSession.changePasswordOfPref(getApplicationContext(),
-                        editText_oldPassword.getText().toString(),
-                        editText_newPassword.getText().toString());
-                if (check) {
-                    Toast.makeText(ChangePasswordActivity.this, "Password Changed", Toast.LENGTH_SHORT).show();
-                    finish();
+
+                // check error
+                if (editText_oldPassword.getText().toString().isEmpty()) {
+                    textInputLayout_oldPassword.setError("Set old password");
                 } else {
-                    Toast.makeText(ChangePasswordActivity.this, "Something Wrong", Toast.LENGTH_SHORT).show();
+                    textInputLayout_oldPassword.setError(null);
                 }
+
+                if (editText_newPassword.getText().toString().isEmpty()) {
+                    textInputLayout_newPassword.setError("Set new password");
+                } else {
+                    textInputLayout_newPassword.setError(null);
+                }
+
+                if (!editText_newPassword.getText().toString().equals(editText_newPasswordAgain.getText().toString())) {
+                    textInputLayout_newPasswordAgain.setError("Password Mismatch");
+                } else {
+                    textInputLayout_newPasswordAgain.setError(null);
+                }
+
+                if (textInputLayout_oldPassword.getError() == null && textInputLayout_newPasswordAgain.getError() == null) {
+
+                    LoginSession loginSession = new LoginSession();
+                    boolean check = loginSession.changePasswordOfPref(getApplicationContext(),
+                            editText_oldPassword.getText().toString(),
+                            editText_newPassword.getText().toString());
+                    if (check) {
+                        Toast.makeText(ChangePasswordActivity.this, "Password Changed", Toast.LENGTH_SHORT).show();
+                        finish();
+                    } else {
+                        textInputLayout_oldPassword.setError("Wrong Old Password");
+                    }
+
+                }
+
+
             }
         });
     }

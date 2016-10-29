@@ -2,6 +2,7 @@ package com.touhidapps.quicktodo.login;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.widget.TextView;
 
 /**
