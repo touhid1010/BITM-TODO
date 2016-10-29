@@ -1,5 +1,6 @@
 package com.touhidapps.quicktodo.login;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
@@ -53,6 +54,11 @@ public class LoginSession {
 
     }
 
+    public boolean logout(Context context) {
+        context.getSharedPreferences(MY_PREFERENCE_NAME, context.MODE_PRIVATE).edit().putBoolean(MY_PREFERENCE_KEY_SESSION, false).apply();
+        return true;
+    }
+
     public boolean isLoggedIn(Context context) {
 
         if (context.getSharedPreferences(MY_PREFERENCE_NAME, context.MODE_PRIVATE).getBoolean(MY_PREFERENCE_KEY_SESSION, false)) {
@@ -73,6 +79,7 @@ public class LoginSession {
             return false;
         }
     }
+
 
 
 }

@@ -27,8 +27,9 @@
         android:id="@+id/fab_addGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:backgroundTint="#90c5ff"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_media_play" />
+        app:srcCompat="@drawable/ic_plus" />
 
 </android.support.design.widget.CoordinatorLayout>
