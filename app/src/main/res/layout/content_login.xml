@@ -31,7 +31,7 @@
             android:id="@+id/editText_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_new_lock"
+            android:drawableLeft="@drawable/ic_old_lock"
             android:hint="Password"
             android:inputType="textPassword" />
 
