@@ -2,10 +2,7 @@ package com.touhidapps.quicktodo.login;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * Created by Md. Touhidul Islam on 10/29/2016.
@@ -19,7 +16,11 @@ public class LoginSession {
     private static String MY_PREFERENCE_KEY_SESSION = "_LOGIN_PREF_KEY_SESSION";
     private static String MY_PREFERENCE_KEY_CHECK_CONTAINS = "_LOGIN_PREF_KEY_CHECK";
 
-    public LoginSession(Context context, TextView textView) {
+    public LoginSession() {
+
+    }
+
+    public void loginSessionMake(Context context, TextView textView) {
 
         // Make pref if not exists and set default value
         prefs = context.getSharedPreferences(MY_PREFERENCE_NAME, context.MODE_PRIVATE);
@@ -59,6 +60,13 @@ public class LoginSession {
             return false;
         }
 
+    }
+
+    public boolean changePasswordOfPref() {
+
+
+
+        return true;
     }
 
 

@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.touhidapps.quicktodo.ChangePasswordActivity;
 import com.touhidapps.quicktodo.MainActivity;
 import com.touhidapps.quicktodo.R;
 
@@ -39,7 +40,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         button_changePassword.setOnClickListener(this);
 
         // Make login session
-        loginSession = new LoginSession(this, textView_defaultPassword);
+        loginSession = new LoginSession();
+        loginSession.loginSessionMake(this, textView_defaultPassword);
 
         /**
          * if get logged in start home activity
@@ -71,7 +73,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             case R.id.button_changePassword:
 
-                
+                startActivity(new Intent(getApplicationContext(), ChangePasswordActivity.class));
 
                 break;
         }
