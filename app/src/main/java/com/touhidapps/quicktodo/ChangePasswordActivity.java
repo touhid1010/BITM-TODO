@@ -41,16 +41,16 @@ public class ChangePasswordActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 LoginSession loginSession = new LoginSession();
-                boolean check = loginSession.changePasswordOfPref();
+                boolean check = loginSession.changePasswordOfPref(getApplicationContext(),
+                        editText_oldPassword.getText().toString(),
+                        editText_newPassword.getText().toString());
                 if (check) {
                     Toast.makeText(ChangePasswordActivity.this, "Password Changed", Toast.LENGTH_SHORT).show();
+                    finish();
                 } else {
                     Toast.makeText(ChangePasswordActivity.this, "Something Wrong", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
-
     }
-
 }

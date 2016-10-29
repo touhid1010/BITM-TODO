@@ -62,11 +62,15 @@ public class LoginSession {
 
     }
 
-    public boolean changePasswordOfPref() {
+    public boolean changePasswordOfPref(Context context, String oldPassword, String newPassword) {
 
-
-
-        return true;
+        if (oldPassword.equals(context.getSharedPreferences(MY_PREFERENCE_NAME, context.MODE_PRIVATE).getString(MY_PREFERENCE_KEY_PASSWORD, ""))) {
+            // Change value
+            context.getSharedPreferences(MY_PREFERENCE_NAME, context.MODE_PRIVATE).edit().putString(MY_PREFERENCE_KEY_PASSWORD, newPassword).apply();
+            return true;
+        } else {
+            return false;
+        }
     }
 
 
