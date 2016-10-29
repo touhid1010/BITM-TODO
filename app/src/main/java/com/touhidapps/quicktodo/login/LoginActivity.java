@@ -1,4 +1,4 @@
-package com.touhidapps.quicktodo;
+package com.touhidapps.quicktodo.login;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,18 +15,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.touhidapps.quicktodo.MainActivity;
+import com.touhidapps.quicktodo.R;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
-
-    SharedPreferences prefs;
-    private static String MY_PREFERENCE_NAME = "_LOGIN_PREF_NAME";
-    private static String MY_PREFERENCE_KEY_DEFAULT_PASSWORD = "_LOGIN_PREF_KEY_PASSWORD";
-    private static String MY_PREFERENCE_KEY_CHECK_CONTAINS = "_LOGIN_PREF_KEY_CHECK";
 
     TextView textView_defaultPassword;
     TextInputLayout textInputLayout_password;
     EditText editText_password;
     Button button_login;
+
+    LoginSession loginSession;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,33 +41,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         textInputLayout_password = (TextInputLayout) findViewById(R.id.textInputLayout_password);
         editText_password = (EditText) findViewById(R.id.editText_password);
         button_login = (Button) findViewById(R.id.button_login);
-
-
-        // Make pref if not exists and set default value
-        prefs = this.getSharedPreferences(MY_PREFERENCE_NAME, Context.MODE_PRIVATE);
-
-        if (!prefs.getBoolean(MY_PREFERENCE_KEY_CHECK_CONTAINS, false)) {  // first time this will not get true value so default false will return
-
-            // Put a true value to check app is opened first time
-            prefs.edit().putBoolean(MY_PREFERENCE_KEY_CHECK_CONTAINS, true).apply();
-
-
-            // Make default value after making the pref
-            assert prefs != null;
-            prefs.edit().putString(MY_PREFERENCE_KEY_DEFAULT_PASSWORD, "0000").apply();
-
-            // Show default value
-            textView_defaultPassword.setText("Default Password is: " + getSharedPreferences(MY_PREFERENCE_NAME, MODE_PRIVATE).getString(MY_PREFERENCE_KEY_DEFAULT_PASSWORD, ""));
-        } else {
-            textView_defaultPassword.setText("");
-        }
-
-
-
         button_login.setOnClickListener(this);
 
-
-        Log.d("touhid1", "onCreate: " + getSharedPreferences(MY_PREFERENCE_NAME, MODE_PRIVATE).getString(MY_PREFERENCE_KEY_DEFAULT_PASSWORD, ""));
+        // Make login session
+        loginSession = new LoginSession(this, textView_defaultPassword);
 
 
     } // End of onCreate
@@ -76,7 +54,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         switch (view.getId()) {
             case R.id.button_login:
 
-                startActivity(new Intent(this, MainActivity.class));
+                boolean check = loginSession.setSession(getApplicationContext(), editText_password.getText().toString());
+
+                if (check) {
+                    startActivity(new Intent(this, MainActivity.class));
+                    finish();
+                } else {
+                    Toast.makeText(this, "Password Error, Please Try again!", Toast.LENGTH_SHORT).show();
+                    editText_password.getText().clear();
+                }
 
                 break;
         }
