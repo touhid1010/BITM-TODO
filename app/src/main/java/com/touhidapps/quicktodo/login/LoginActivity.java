@@ -1,16 +1,9 @@
 package com.touhidapps.quicktodo.login;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -45,7 +38,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         // Make login session
         loginSession = new LoginSession(this, textView_defaultPassword);
-        if (loginSession.isLogedIn(this)) {
+        if (loginSession.isLoggedIn(this)) {
             startActivity(new Intent(this, MainActivity.class));
             finish();
         }
