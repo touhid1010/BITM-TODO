@@ -30,12 +30,14 @@ public class MainActivity extends AppCompatActivity {
         fab_addGroup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
                 // get prompts.xml view
-                LayoutInflater li = LayoutInflater.from(getApplicationContext());
+                LayoutInflater li = LayoutInflater.from(MainActivity.this);
                 View promptsView = li.inflate(R.layout.my_prompts, null);
 
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                        getApplicationContext());
+                        MainActivity.this);
 
                 // set my_prompts.xml to alertdialog builder
                 alertDialogBuilder.setView(promptsView);
