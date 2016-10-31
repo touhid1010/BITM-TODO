@@ -51,7 +51,6 @@ public class LoginSession {
         } else {
             return false;
         }
-
     }
 
     public boolean logout(Context context) {
@@ -66,7 +65,6 @@ public class LoginSession {
         } else {
             return false;
         }
-
     }
 
     public boolean changePasswordOfPref(Context context, String oldPassword, String newPassword) {
