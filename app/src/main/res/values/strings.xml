@@ -3,4 +3,5 @@
     <string name="action_logout">Logout</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_change_password">ChangePasswordActivity</string>
+    <string name="title_activity_task_group_list">Task Group List Activity</string>
 </resources>
