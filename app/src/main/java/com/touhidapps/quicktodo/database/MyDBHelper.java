@@ -11,8 +11,6 @@ import android.provider.BaseColumns;
 
 public class MyDBHelper extends SQLiteOpenHelper {
 
-
-
     private static final String TAG = MyDBHelper.class.getSimpleName();
     private static final String DATABASE_NAME = "todoList.db";
     private static final int DATABASE_VERSION = 1;
@@ -33,7 +31,6 @@ public class MyDBHelper extends SQLiteOpenHelper {
     public MyDBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         mContext = context;
-
     }
 
     @Override

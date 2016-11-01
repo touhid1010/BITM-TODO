@@ -12,10 +12,11 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
-import android.widget.Toast;
 
+import com.touhidapps.quicktodo.database.MyTaskGroup;
 import com.touhidapps.quicktodo.login.LoginActivity;
 import com.touhidapps.quicktodo.login.LoginSession;
+import com.touhidapps.quicktodo.todoList.TodoListGroup;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,11 +51,10 @@ public class MainActivity extends AppCompatActivity {
                         .setCancelable(false)
                         .setPositiveButton("OK",
                                 new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,int id) {
-                                        // get user input and set it to result
-                                        // edit text
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        // get user input and set it to db
+                                        saveGroupNameToDb(userInput.getText().toString());
 
-                                        Toast.makeText(MainActivity.this, ""+userInput.getText(), Toast.LENGTH_SHORT).show();
                                     }
                                 })
                         .setNegativeButton("Cancel",
@@ -69,23 +69,22 @@ public class MainActivity extends AppCompatActivity {
 
                 // show it
                 alertDialog.show();
+
+
             }
         });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     } // End of OnCreate
+
+
+    // Save group name to db
+    private void saveGroupNameToDb(String name) {
+        TodoListGroup todoListGroup = new TodoListGroup(name);
+        MyTaskGroup myTaskGroup = new MyTaskGroup(getApplicationContext());
+        myTaskGroup.addTodoListGroup(todoListGroup);
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
