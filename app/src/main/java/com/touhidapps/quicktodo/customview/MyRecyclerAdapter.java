@@ -17,13 +17,12 @@ import java.util.ArrayList;
  * Created by Touhid on 11/1/2016.
  */
 
-public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerViewHolder> {
+public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerViewHolder> implements View.OnClickListener {
 
     ArrayList<TodoGroupList> name;
 
     Context context;
     LayoutInflater inflater;
-
     public MyRecyclerAdapter(Context context, ArrayList<TodoGroupList> name) {
         this.context = context;
         this.name = name;
@@ -35,13 +34,15 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerViewHolder
         View v = inflater.inflate(R.layout.my_cardview_layout, parent, false);
 
         MyRecyclerViewHolder viewHolder = new MyRecyclerViewHolder(v);
+        v.setOnClickListener(this);
         return viewHolder;
     }
+
 
     @Override
     public void onBindViewHolder(MyRecyclerViewHolder holder, int position) {
         holder.tv1.setText(name.get(position).getName());
-        holder.imageView.setOnClickListener(clickListener);
+//        holder.imageView.setOnClickListener(clickListener);
         holder.imageView.setTag(holder);
     }
 
@@ -50,17 +51,11 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerViewHolder
         return name.size();
     }
 
-    View.OnClickListener clickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
+    @Override
+    public void onClick(View view) {
 
-            MyRecyclerViewHolder vholder = (MyRecyclerViewHolder) v.getTag();
-            int position = vholder.getLayoutPosition();
+        // TODO
+        Toast.makeText(context, "This is position " + view.getId(), Toast.LENGTH_LONG).show();
 
-            Toast.makeText(context, "This is position " + position, Toast.LENGTH_LONG).show();
-
-        }
-    };
-
-
+    }
 }

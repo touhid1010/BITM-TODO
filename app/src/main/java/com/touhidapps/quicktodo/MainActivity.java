@@ -28,8 +28,9 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
 
     ArrayList<TodoGroupList> groupName;
-
+    TodoGroupList todoGroupList;
     MyTaskGroup myTaskGroup;
+    MyRecyclerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,17 @@ public class MainActivity extends AppCompatActivity {
 
         myTaskGroup = new MyTaskGroup(this);
         groupName = myTaskGroup.getAllTodoListGroup();
+
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView_group);
+
+        adapter = new MyRecyclerAdapter(this, groupName);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setHasFixedSize(true);
+
+        //Layout manager for Recycler view
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
 
         FloatingActionButton fab_addGroup = (FloatingActionButton) findViewById(R.id.fab_addGroup);
         fab_addGroup.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +81,10 @@ public class MainActivity extends AppCompatActivity {
                                         // get user input and set it to db
                                         saveGroupNameToDb(userInput.getText().toString());
 
+                                        groupName.add(todoGroupList);
+                                        adapter.notifyDataSetChanged();
+                                        recyclerView.invalidate();
+
                                     }
                                 })
                         .setNegativeButton("Cancel",
@@ -86,22 +102,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView_group);
-
-        MyRecyclerAdapter adapter = new MyRecyclerAdapter(this, groupName);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setHasFixedSize(true);
-
-        //Layout manager for Recycler view
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
     } // End of OnCreate
 
 
     // Save group name to db
     private void saveGroupNameToDb(String name) {
-        TodoGroupList todoGroupList = new TodoGroupList(name);
+        todoGroupList = new TodoGroupList(name);
         MyTaskGroup myTaskGroup = new MyTaskGroup(getApplicationContext());
         myTaskGroup.addTodoListGroup(todoGroupList);
     }
