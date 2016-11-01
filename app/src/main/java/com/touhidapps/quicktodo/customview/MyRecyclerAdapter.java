@@ -15,14 +15,14 @@ import com.touhidapps.quicktodo.R;
 
 public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerViewHolder> {
 
-    String[] name = {"Androidwarriors", "444 StackoverflowStackoverflowStackoverflowStackoverflowStackoverflowStackoverflowStackoverflowStackoverflowStackoverflowStackoverflowStackoverflowStackoverflow ooo", "Developer Android", "AndroidHive",
-            "Slidenerd", "TheNewBoston", "Truiton", "HmkCode", "JavaTpoint", "Javapeper"};
+    String[] name;
 
     Context context;
     LayoutInflater inflater;
 
-    public MyRecyclerAdapter(Context context) {
+    public MyRecyclerAdapter(Context context, String[] name) {
         this.context = context;
+        this.name = name;
         inflater = LayoutInflater.from(context);
     }
 

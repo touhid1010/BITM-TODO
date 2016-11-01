@@ -25,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
 
+    String[] groupName = {"Androidwarriors", "444 fcgdft ooo", "Developer Android", "AndroidHive",
+            "Slidenerd", "TheNewBoston", "Truiton", "HmkCode", "JavaTpoint", "Javapeper"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,15 +77,12 @@ public class MainActivity extends AppCompatActivity {
 
                 // show it
                 alertDialog.show();
-
-
             }
         });
 
-
         recyclerView= (RecyclerView) findViewById(R.id.recyclerView_group);
 
-        MyRecyclerAdapter adapter=new MyRecyclerAdapter(this);
+        MyRecyclerAdapter adapter=new MyRecyclerAdapter(this, groupName);
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
 
@@ -99,7 +99,6 @@ public class MainActivity extends AppCompatActivity {
         MyTaskGroup myTaskGroup = new MyTaskGroup(getApplicationContext());
         myTaskGroup.addTodoListGroup(todoListGroup);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
