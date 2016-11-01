@@ -15,7 +15,7 @@ import com.touhidapps.quicktodo.R;
 
 public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerViewHolder> {
 
-    String[] name = {"Androidwarriors", "Stackoverflow", "Developer Android", "AndroidHive",
+    String[] name = {"Androidwarriors", "444 StackoverflowStackoverflowStackoverflowStackoverflowStackoverflowStackoverflowStackoverflowStackoverflowStackoverflowStackoverflowStackoverflowStackoverflow ooo", "Developer Android", "AndroidHive",
             "Slidenerd", "TheNewBoston", "Truiton", "HmkCode", "JavaTpoint", "Javapeper"};
 
     Context context;
@@ -40,7 +40,6 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerViewHolder
         holder.imageView.setOnClickListener(clickListener);
         holder.imageView.setTag(holder);
     }
-
 
     @Override
     public int getItemCount() {
