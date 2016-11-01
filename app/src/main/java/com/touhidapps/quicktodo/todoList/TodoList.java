@@ -8,13 +8,13 @@ import java.util.ArrayList;
 
 public class TodoList {
 
-    private ArrayList<TodoListGroup> todoListGroups;
+    private ArrayList<TodoGroupList> todoGroupList;
 
-    public ArrayList<TodoListGroup> getTodoListGroups() {
-        return todoListGroups;
+    public ArrayList<TodoGroupList> getTodoListGroups() {
+        return todoGroupList;
     }
 
-    public void setTodoListGroups(ArrayList<TodoListGroup> todoListGroups) {
-        this.todoListGroups = todoListGroups;
+    public void setTodoListGroups(ArrayList<TodoGroupList> todoListGroups) {
+        this.todoGroupList = todoGroupList;
     }
 }

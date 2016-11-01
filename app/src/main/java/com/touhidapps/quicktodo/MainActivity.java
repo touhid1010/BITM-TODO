@@ -19,7 +19,7 @@ import com.touhidapps.quicktodo.customview.MyRecyclerAdapter;
 import com.touhidapps.quicktodo.database.MyTaskGroup;
 import com.touhidapps.quicktodo.login.LoginActivity;
 import com.touhidapps.quicktodo.login.LoginSession;
-import com.touhidapps.quicktodo.todoList.TodoListGroup;
+import com.touhidapps.quicktodo.todoList.TodoGroupList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -95,9 +95,9 @@ public class MainActivity extends AppCompatActivity {
 
     // Save group name to db
     private void saveGroupNameToDb(String name) {
-        TodoListGroup todoListGroup = new TodoListGroup(name);
+        TodoGroupList todoGroupList = new TodoGroupList(name);
         MyTaskGroup myTaskGroup = new MyTaskGroup(getApplicationContext());
-        myTaskGroup.addTodoListGroup(todoListGroup);
+        myTaskGroup.addTodoListGroup(todoGroupList);
     }
 
     @Override
