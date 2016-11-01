@@ -21,12 +21,15 @@ import com.touhidapps.quicktodo.login.LoginActivity;
 import com.touhidapps.quicktodo.login.LoginSession;
 import com.touhidapps.quicktodo.todoList.TodoGroupList;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
 
-    String[] groupName = {"Androidwarriors", "444 fcgdft ooo", "Developer Android", "AndroidHive",
-            "Slidenerd", "TheNewBoston", "Truiton", "HmkCode", "JavaTpoint", "Javapeper"};
+    ArrayList<TodoGroupList> groupName;
+
+    MyTaskGroup myTaskGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        myTaskGroup = new MyTaskGroup(this);
+        groupName = myTaskGroup.getAllTodoListGroup();
 
         FloatingActionButton fab_addGroup = (FloatingActionButton) findViewById(R.id.fab_addGroup);
         fab_addGroup.setOnClickListener(new View.OnClickListener() {
@@ -80,9 +86,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        recyclerView= (RecyclerView) findViewById(R.id.recyclerView_group);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView_group);
 
-        MyRecyclerAdapter adapter=new MyRecyclerAdapter(this, groupName);
+        MyRecyclerAdapter adapter = new MyRecyclerAdapter(this, groupName);
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
 

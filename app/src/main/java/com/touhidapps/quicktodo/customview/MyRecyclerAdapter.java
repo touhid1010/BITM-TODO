@@ -2,12 +2,16 @@ package com.touhidapps.quicktodo.customview;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.touhidapps.quicktodo.R;
+import com.touhidapps.quicktodo.todoList.TodoGroupList;
+
+import java.util.ArrayList;
 
 /**
  * Created by Touhid on 11/1/2016.
@@ -15,12 +19,12 @@ import com.touhidapps.quicktodo.R;
 
 public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerViewHolder> {
 
-    String[] name;
+    ArrayList<TodoGroupList> name;
 
     Context context;
     LayoutInflater inflater;
 
-    public MyRecyclerAdapter(Context context, String[] name) {
+    public MyRecyclerAdapter(Context context, ArrayList<TodoGroupList> name) {
         this.context = context;
         this.name = name;
         inflater = LayoutInflater.from(context);
@@ -36,14 +40,14 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerViewHolder
 
     @Override
     public void onBindViewHolder(MyRecyclerViewHolder holder, int position) {
-        holder.tv1.setText(name[position]);
+        holder.tv1.setText(name.get(position).getName());
         holder.imageView.setOnClickListener(clickListener);
         holder.imageView.setTag(holder);
     }
 
     @Override
     public int getItemCount() {
-        return name.length;
+        return name.size();
     }
 
     View.OnClickListener clickListener = new View.OnClickListener() {
