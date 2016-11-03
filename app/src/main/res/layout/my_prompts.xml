@@ -17,6 +17,8 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_group"
             android:hint="Group Name"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
             android:lines="1"
             android:inputType="text" >
             <!--<requestFocus />-->
