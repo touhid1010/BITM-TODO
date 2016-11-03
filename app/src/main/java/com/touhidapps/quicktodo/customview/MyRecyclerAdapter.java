@@ -2,7 +2,6 @@ package com.touhidapps.quicktodo.customview;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +30,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerViewHolder
 
     @Override
     public MyRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = inflater.inflate(R.layout.my_cardview_layout, parent, false);
+        View v = inflater.inflate(R.layout.my_cardview_layout_for_task_group_list, parent, false);
 
         MyRecyclerViewHolder viewHolder = new MyRecyclerViewHolder(v);
         v.setOnClickListener(this);
