@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 
+import com.touhidapps.quicktodo.AddNewTask;
 import com.touhidapps.quicktodo.R;
 import com.touhidapps.quicktodo.commonitems.CommonNames;
 import com.touhidapps.quicktodo.customview.MyRecyclerAdapter;
@@ -55,22 +56,16 @@ public class AllTaskList extends AppCompatActivity implements View.OnClickListen
         }
 
 
-
-
-
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        fab.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
-
+        switch (view.getId()) {
+            case R.id.fab:
+                startActivity(new Intent(getApplicationContext(), AddNewTask.class));
+                break;
+        }
     }
 }

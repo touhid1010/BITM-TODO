@@ -5,4 +5,5 @@
     <string name="title_activity_change_password">ChangePasswordActivity</string>
     <string name="title_activity_task_group_list">Task Group List Activity</string>
     <string name="title_activity_all_task_list">AllTaskList</string>
+    <string name="title_activity_add_new_task">AddNewTask</string>
 </resources>
