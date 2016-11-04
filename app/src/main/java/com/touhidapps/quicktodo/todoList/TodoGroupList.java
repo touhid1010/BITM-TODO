@@ -10,7 +10,7 @@ public class TodoGroupList {
 
     private long id;
     private String name;
-    private ArrayList<TodoListTask> todoListTasks;
+    private ArrayList<TodoTaskList> todoListTasks;
 
     public TodoGroupList(String name) {
         this.name = name;
@@ -37,11 +37,11 @@ public class TodoGroupList {
         this.name = name;
     }
 
-    public ArrayList<TodoListTask> getTodoListTasks() {
+    public ArrayList<TodoTaskList> getTodoListTasks() {
         return todoListTasks;
     }
 
-    public void setTodoListTasks(ArrayList<TodoListTask> todoListTasks) {
+    public void setTodoListTasks(ArrayList<TodoTaskList> todoListTasks) {
         this.todoListTasks = todoListTasks;
     }
 }

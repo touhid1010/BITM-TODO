@@ -22,6 +22,7 @@ import com.touhidapps.quicktodo.customview.MyRecyclerAdapter;
 import com.touhidapps.quicktodo.database.MyTaskGroup;
 import com.touhidapps.quicktodo.login.LoginActivity;
 import com.touhidapps.quicktodo.login.LoginSession;
+import com.touhidapps.quicktodo.todoList.AllTaskList;
 import com.touhidapps.quicktodo.todoList.TodoGroupList;
 
 import java.util.ArrayList;
@@ -32,10 +33,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     CardView cardView_deactivatedTaskGroup,
             cardView_todayTask;
 
-    ArrayList<TodoGroupList> groupName;
-    TodoGroupList todoGroupList;
     MyTaskGroup myTaskGroup;
+    ArrayList<TodoGroupList> groupNameAndId;
+    TodoGroupList todoGroupList;
     MyRecyclerAdapter adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,21 +47,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setSupportActionBar(toolbar);
 
         myTaskGroup = new MyTaskGroup(this);
-        groupName = myTaskGroup.getAllTodoListGroup();
+        groupNameAndId = myTaskGroup.getAllTodoListGroup();
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView_group);
         cardView_deactivatedTaskGroup = (CardView) findViewById(R.id.cardView_deactivatedTaskGroup);
         cardView_todayTask = (CardView) findViewById(R.id.cardView_todayTask);
         cardView_deactivatedTaskGroup.setOnClickListener(this);
         cardView_todayTask.setOnClickListener(this);
-        adapter = new MyRecyclerAdapter(this, groupName);
+        adapter = new MyRecyclerAdapter(this, groupNameAndId); // on Click listener inside it
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
 
         //Layout manager for Recycler view
-
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
 
         FloatingActionButton fab_addGroup = (FloatingActionButton) findViewById(R.id.fab_addGroup);
         fab_addGroup.setOnClickListener(this);
@@ -71,7 +71,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // Save group name to db
     private void saveGroupNameToDb(String name) {
         todoGroupList = new TodoGroupList(name);
-        MyTaskGroup myTaskGroup = new MyTaskGroup(getApplicationContext());
         myTaskGroup.addTodoListGroup(todoGroupList);
     }
 
@@ -118,7 +117,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     finish();
-
                                 }
                             }).create().show();
             }
@@ -131,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()) {
             case R.id.fab_addGroup:
 
-                // get prompts.xml view
+                // Get prompts.xml view
                 LayoutInflater li = LayoutInflater.from(MainActivity.this);
                 View promptsView = li.inflate(R.layout.my_prompts, null);
 
@@ -150,10 +148,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .setPositiveButton("OK",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
-                                        // get user input and set it to db
+                                        // Get user input and set it to db
                                         saveGroupNameToDb(userInput.getText().toString());
 
-                                        groupName.add(todoGroupList);
+                                        // Auto refresh group list
+                                        groupNameAndId.add(todoGroupList);
                                         adapter.notifyDataSetChanged();
                                         recyclerView.invalidate();
                                     }
@@ -173,30 +172,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.cardView_deactivatedTaskGroup:
-                Toast.makeText(this, "ok", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(), AllTaskList.class));
                 break;
 
             case R.id.cardView_todayTask:
-                Toast.makeText(this, "ok ttt", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(), AllTaskList.class));
                 break;
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

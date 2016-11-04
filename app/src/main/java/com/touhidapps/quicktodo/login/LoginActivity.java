@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.touhidapps.quicktodo.ChangePasswordActivity;
 import com.touhidapps.quicktodo.MainActivity;
 import com.touhidapps.quicktodo.R;
 

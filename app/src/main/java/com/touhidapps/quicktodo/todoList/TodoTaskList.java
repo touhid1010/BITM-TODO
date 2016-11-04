@@ -4,7 +4,7 @@ package com.touhidapps.quicktodo.todoList;
  * Created by Touhid on 10/30/2016.
  */
 
-public class TodoListTask {
+public class TodoTaskList {
 
     private long id;
     private long group_id;
@@ -13,12 +13,12 @@ public class TodoListTask {
     private String note;
     private String currentState;
 
-    public TodoListTask(long group_id, String title) {
+    public TodoTaskList(long group_id, String title) {
         this.group_id = group_id;
         this.title = title;
     }
 
-    public TodoListTask(long group_id, String title, String dueDate, String note, String currentState) {
+    public TodoTaskList(long group_id, String title, String dueDate, String note, String currentState) {
         this.group_id = group_id;
         this.title = title;
         this.dueDate = dueDate;
@@ -26,7 +26,7 @@ public class TodoListTask {
         this.currentState = currentState;
     }
 
-    public TodoListTask(long id, long group_id, String title, String dueDate, String note, String currentState) {
+    public TodoTaskList(long id, long group_id, String title, String dueDate, String note, String currentState) {
         this.id = id;
         this.group_id = group_id;
         this.title = title;

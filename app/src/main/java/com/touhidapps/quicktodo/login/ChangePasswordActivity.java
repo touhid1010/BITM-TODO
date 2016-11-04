@@ -1,4 +1,4 @@
-package com.touhidapps.quicktodo;
+package com.touhidapps.quicktodo.login;
 
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.touhidapps.quicktodo.login.LoginSession;
+import com.touhidapps.quicktodo.R;
 
 
 public class ChangePasswordActivity extends AppCompatActivity {
