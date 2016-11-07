@@ -41,7 +41,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                // check error
+                // Check error
                 if (editText_oldPassword.getText().toString().isEmpty()) {
                     textInputLayout_oldPassword.setError("Set old password");
                 } else {
@@ -72,10 +72,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                     } else {
                         textInputLayout_oldPassword.setError("Wrong Old Password");
                     }
-
                 }
-
-
             }
         });
     }
