@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import com.touhidapps.quicktodo.R;
 import com.touhidapps.quicktodo.commonitems.CommonNames;
-import com.touhidapps.quicktodo.todoList.AllTaskList;
+import com.touhidapps.quicktodo.view.AllTaskList;
 import com.touhidapps.quicktodo.todoList.TodoGroupList;
 
 
@@ -52,7 +52,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerViewHolder
 //        holder.tv1.setTag(holder);
         holder.tv1.setTag(nameAndId.get(position).getName());
 
-        holder.overflowimage.setOnClickListener(new View.OnClickListener() {
+        holder.card_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d("touhidd", "onClick: "+holder.tv1.getText());
@@ -61,7 +61,6 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerViewHolder
                 ((Activity)context).startActivity(intent);
             }
         });
-
     }
 
     @Override

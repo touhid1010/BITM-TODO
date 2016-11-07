@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    
 
     <application
         android:allowBackup="true"
@@ -13,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".view.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -23,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".login.LoginActivity"
+            android:name=".view.LoginActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -41,11 +42,11 @@
             android:label="@string/title_activity_task_group_list"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".todoList.AllTaskList"
+            android:name=".view.AllTaskList"
             android:label="@string/title_activity_all_task_list"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".AddNewTask"
+            android:name=".view.AddNewTask"
             android:label="@string/title_activity_add_new_task"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

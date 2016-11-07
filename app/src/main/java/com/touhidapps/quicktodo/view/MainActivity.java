@@ -1,4 +1,4 @@
-package com.touhidapps.quicktodo;
+package com.touhidapps.quicktodo.view;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -16,13 +16,11 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
-import android.widget.Toast;
 
+import com.touhidapps.quicktodo.R;
 import com.touhidapps.quicktodo.customview.MyRecyclerAdapter;
 import com.touhidapps.quicktodo.database.MyTaskGroup;
-import com.touhidapps.quicktodo.login.LoginActivity;
 import com.touhidapps.quicktodo.login.LoginSession;
-import com.touhidapps.quicktodo.todoList.AllTaskList;
 import com.touhidapps.quicktodo.todoList.TodoGroupList;
 
 import java.util.ArrayList;
@@ -37,7 +35,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ArrayList<TodoGroupList> groupNameAndId;
     TodoGroupList todoGroupList;
     MyRecyclerAdapter adapter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

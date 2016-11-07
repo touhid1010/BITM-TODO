@@ -1,4 +1,4 @@
-package com.touhidapps.quicktodo.login;
+package com.touhidapps.quicktodo.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +10,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.touhidapps.quicktodo.MainActivity;
+import com.touhidapps.quicktodo.login.ChangePasswordActivity;
+import com.touhidapps.quicktodo.login.LoginSession;
+import com.touhidapps.quicktodo.view.MainActivity;
 import com.touhidapps.quicktodo.R;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
