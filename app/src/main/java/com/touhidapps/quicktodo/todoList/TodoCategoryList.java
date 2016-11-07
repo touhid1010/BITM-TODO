@@ -6,17 +6,17 @@ import java.util.ArrayList;
  * Created by Touhid on 10/30/2016.
  */
 
-public class TodoGroupList {
+public class TodoCategoryList {
 
     private long id;
     private String name;
     private ArrayList<TodoTaskList> todoListTasks;
 
-    public TodoGroupList(String name) {
+    public TodoCategoryList(String name) {
         this.name = name;
     }
 
-    public TodoGroupList(long id, String name) {
+    public TodoCategoryList(long id, String name) {
         this.id = id;
         this.name = name;
     }
