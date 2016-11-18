@@ -1,11 +1,7 @@
-package com.touhidapps.quicktodo.database;
+package com.touhidapps.quicktodo.helper;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-
-import com.touhidapps.quicktodo.commonitems.CommonNames;
-import com.touhidapps.quicktodo.entity.AllTask;
 
 /**
  * Created by Touhid on 10/28/2016.
@@ -21,7 +17,7 @@ public class MyTask {
         mOpenHelper = new MyDBHelper(mContext);
     }
 
-//    public long addTodoListTask(AllTask todoListTask){
+//    public long addTodoListTask(TodoTask todoListTask){
 //        sqLiteDatabase = mOpenHelper.getWritableDatabase();
 //        ContentValues contentValues = new ContentValues();
 //        contentValues.put(CommonNames.TodoList_task_Columns.GROUP_ID, todoListTask.getGroup_id());

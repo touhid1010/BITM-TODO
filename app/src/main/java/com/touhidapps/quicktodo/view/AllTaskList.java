@@ -13,13 +13,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
-import com.touhidapps.quicktodo.entity.AllTask;
 import com.touhidapps.quicktodo.todoList.TodoGroupList;
-import com.touhidapps.quicktodo.view.AddNewTask;
 import com.touhidapps.quicktodo.R;
 import com.touhidapps.quicktodo.commonitems.CommonNames;
 import com.touhidapps.quicktodo.customview.MyRecyclerAdapter;
-import com.touhidapps.quicktodo.database.MyTaskGroup;
+import com.touhidapps.quicktodo.helper.TaskCategory;
 
 import java.util.ArrayList;
 
@@ -32,7 +30,7 @@ public class AllTaskList extends AppCompatActivity implements View.OnClickListen
 
     ArrayList<TodoGroupList> nameAndId;
     TodoGroupList todoGroupList;
-    MyTaskGroup myTaskGroup;
+    TaskCategory myTaskGroup;
     MyRecyclerAdapter adapter;
     String gName;
 

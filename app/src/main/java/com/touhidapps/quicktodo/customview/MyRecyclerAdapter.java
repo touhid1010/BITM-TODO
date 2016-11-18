@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 
 import com.touhidapps.quicktodo.R;
 import com.touhidapps.quicktodo.commonitems.CommonNames;
+import com.touhidapps.quicktodo.model.TodoCategory;
 import com.touhidapps.quicktodo.view.AllTaskList;
-import com.touhidapps.quicktodo.todoList.TodoGroupList;
 
 
 import java.util.ArrayList;
@@ -23,13 +23,13 @@ import java.util.ArrayList;
 
 public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerViewHolder> {
 
-    ArrayList<TodoGroupList> nameAndId;
+    ArrayList<TodoCategory> nameAndId;
 
     Context context;
     LayoutInflater inflater;
     MyRecyclerViewHolder viewHolder;
 
-    public MyRecyclerAdapter(Context context, ArrayList<TodoGroupList> nameAndId) {
+    public MyRecyclerAdapter(Context context, ArrayList<TodoCategory> nameAndId) {
         this.context = context;
         this.nameAndId = nameAndId;
         inflater = LayoutInflater.from(context);
@@ -47,10 +47,10 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerViewHolder
 
     @Override
     public void onBindViewHolder(final MyRecyclerViewHolder holder, int position) {
-        holder.tv1.setText(nameAndId.get(position).getName());
+        holder.tv1.setText(nameAndId.get(position).getCategoryName());
 //        holder.imageView.setOnClickListener(this);
 //        holder.tv1.setTag(holder);
-        holder.tv1.setTag(nameAndId.get(position).getName());
+        holder.tv1.setTag(nameAndId.get(position).getCategoryName());
 
         holder.card_view.setOnClickListener(new View.OnClickListener() {
             @Override

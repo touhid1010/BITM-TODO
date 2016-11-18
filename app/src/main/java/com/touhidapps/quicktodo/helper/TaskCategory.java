@@ -1,52 +1,54 @@
-package com.touhidapps.quicktodo.database;
+package com.touhidapps.quicktodo.helper;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.touhidapps.quicktodo.model.TodoCategory;
+import com.touhidapps.quicktodo.todoList.TodoCategoryList;
 import com.touhidapps.quicktodo.todoList.TodoGroupList;
 
 import java.util.ArrayList;
 
-import static com.touhidapps.quicktodo.database.MyBDItemNaming.TodoList_group_Columns.GROUP_NAME;
+import static com.touhidapps.quicktodo.helper.MyBDItemNaming.TodoList_group_Columns.GROUP_NAME;
 
 /**
  * Created by Touhid on 10/28/2016.
  */
 
-public class MyTaskGroup {
+public class TaskCategory {
 
     private MyDBHelper mOpenHelper;
     private Context mContext;
     private SQLiteDatabase sqLiteDatabase;
 
-    public MyTaskGroup(Context context) {
+    public TaskCategory(Context context) {
         mContext = context;
         mOpenHelper = new MyDBHelper(mContext);
     }
 
-    public long addTodoListGroup(TodoGroupList todoGroupList) {
+    public long addTaskCategory(TodoCategory todoCategory) {
         sqLiteDatabase = mOpenHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(MyBDItemNaming.TodoList_group_Columns.GROUP_NAME, todoGroupList.getName());
-        long data = sqLiteDatabase.insert(MyBDItemNaming.Tables.TODO_LIST_GROUP, null, contentValues);
+        contentValues.put(MyBDItemNaming.TodoTaskCategoryTable.CATEGORY_NAME, todoCategory.getCategoryName());
+        long data = sqLiteDatabase.insert(MyBDItemNaming.Tables.TODO_CATEGORY_LIST, null, contentValues);
         sqLiteDatabase.close();
         return data;
     }
 
-    public ArrayList<TodoGroupList> getAllTodoListGroup() {
+    public ArrayList<TodoCategoryList> getAllTodoListGroup() {
 
         sqLiteDatabase = mOpenHelper.getReadableDatabase();
-        ArrayList<TodoGroupList> todoListGroups = new ArrayList<>();
+        ArrayList<TodoCategoryList> todoListGroups = new ArrayList<>();
         String todoListGroupQuery = "select * from " + MyBDItemNaming.Tables.TODO_LIST_GROUP;
         Cursor cursor = sqLiteDatabase.rawQuery(todoListGroupQuery, null);
-        TodoGroupList todoListGroup;
+        TodoCategoryList todoListGroup;
         if (cursor.moveToFirst()) {
             do {
                 int id = cursor.getInt(cursor.getColumnIndex(MyBDItemNaming.TodoList_group_Columns.GROUP_ID));
                 String name = cursor.getString(cursor.getColumnIndex(GROUP_NAME));
-                todoListGroup = new TodoGroupList(id, name);
+                todoListGroup = new TodoCategoryList(id, name);
                 todoListGroups.add(todoListGroup);
             } while (cursor.moveToNext());
         }
@@ -55,14 +57,14 @@ public class MyTaskGroup {
         return todoListGroups;
     }
 
-    public long updateTodoListGroup(TodoGroupList todoListGroup) {
+    public long updateTodoListGroup(TodoCategoryList todoCategoryList) {
         sqLiteDatabase = mOpenHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(MyBDItemNaming.TodoList_group_Columns.GROUP_ID, todoListGroup.getId());
-        contentValues.put(MyBDItemNaming.TodoList_group_Columns.GROUP_NAME, todoListGroup.getName());
+        contentValues.put(MyBDItemNaming.TodoList_group_Columns.GROUP_ID, todoCategoryList.getId());
+        contentValues.put(MyBDItemNaming.TodoList_group_Columns.GROUP_NAME, todoCategoryList.getName());
         long result = sqLiteDatabase.update(MyBDItemNaming.Tables.TODO_LIST_GROUP, contentValues,
                 MyBDItemNaming.TodoList_group_Columns.GROUP_ID + "=?",
-                new String[]{String.valueOf(todoListGroup.getId())});
+                new String[]{String.valueOf(todoCategoryList.getId())});
         sqLiteDatabase.close();
         return result;
     }
