@@ -34,7 +34,6 @@ public class AddNewTask extends AppCompatActivity {
 
         custom = new DateTimePicker(this,
                 new DateTimePicker.ICustomDateTimeListener() {
-
                     @Override
                     public void onSet(Dialog dialog, Calendar calendarSelected,
                                       Date dateSelected, int year, String monthFullName,
@@ -49,12 +48,12 @@ public class AddNewTask extends AppCompatActivity {
                                         + ", " + hour12 + ":" + min
                                         + " " + AM_PM);
                     }
-
                     @Override
                     public void onCancel() {
 
                     }
                 });
+
         /**
          * Pass Directly current time format it will return AM and PM if you set
          * false
