@@ -8,23 +8,28 @@ import java.util.ArrayList;
 
 public class TodoCategory {
 
-    private long category_id;
+    private long categoryId;
     private String categoryName;
 
     public TodoCategory() {
 
     }
 
-    public TodoCategory(long category_id) {
-        this.category_id = category_id;
+    public TodoCategory(String categoryName) {
+        this.categoryName = categoryName;
     }
 
-    public long getCategory_id() {
-        return category_id;
+    public TodoCategory(long categoryId, String categoryName) {
+        this.categoryId = categoryId;
+        this.categoryName = categoryName;
     }
 
-    public void setCategory_id(long category_id) {
-        this.category_id = category_id;
+    public long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(long categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getCategoryName() {

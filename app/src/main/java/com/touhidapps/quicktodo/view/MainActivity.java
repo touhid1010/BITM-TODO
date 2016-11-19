@@ -21,8 +21,7 @@ import com.touhidapps.quicktodo.R;
 import com.touhidapps.quicktodo.customview.MyRecyclerAdapter;
 import com.touhidapps.quicktodo.helper.TaskCategory;
 import com.touhidapps.quicktodo.login.LoginSession;
-import com.touhidapps.quicktodo.todoList.TodoCategoryList;
-import com.touhidapps.quicktodo.todoList.TodoGroupList;
+import com.touhidapps.quicktodo.model.TodoCategory;
 
 import java.util.ArrayList;
 
@@ -33,8 +32,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             cardView_todayTask;
 
     TaskCategory myTaskGroup;
-    ArrayList<TodoCategoryList> groupNameAndId;
-    TodoCategoryList todoGroupList;
+    ArrayList<TodoCategory> groupNameAndId;
+    TodoCategory todoGroupList;
     MyRecyclerAdapter adapter;
 
     @Override
@@ -68,8 +67,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     // Save group name to db
     private void saveGroupNameToDb(String name) {
-        todoGroupList = new TodoCategoryList(name);
-        myTaskGroup.addTodoListGroup(todoGroupList);
+        todoGroupList = new TodoCategory(name);
+        myTaskGroup.addTaskCategory(todoGroupList);
     }
 
     @Override

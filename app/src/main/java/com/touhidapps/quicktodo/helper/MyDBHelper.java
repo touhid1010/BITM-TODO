@@ -16,17 +16,17 @@ public class MyDBHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private final Context mContext;
 
-    private String db_table_todoList_group_query = "CREATE TABLE " + MyBDItemNaming.Tables.TODO_LIST_GROUP + " ("
+    private String db_table_todoList_group_query = "CREATE TABLE " + MyBDItemNaming.Tables.TODO_CATEGORY_LIST + " ("
             + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-            + MyBDItemNaming.TodoList_group_Columns.GROUP_NAME + " TEXT NOT NULL)";
+            + MyBDItemNaming.TodoTaskCategoryTable.CATEGORY_NAME + " TEXT NOT NULL)";
 
-    private String db_table_todoList_task_query = "CREATE TABLE " + MyBDItemNaming.Tables.TODO_LIST_TASK + " ("
+    private String db_table_todoList_task_query = "CREATE TABLE " + MyBDItemNaming.Tables.TODO_TASK_LIST + " ("
             + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-            + MyBDItemNaming.TodoList_task_Columns.GROUP_ID + " TEXT,"
-            + MyBDItemNaming.TodoList_task_Columns.TASK_TITLE + " TEXT,"
-            + MyBDItemNaming.TodoList_task_Columns.TASK_DUE_DATE + " TEXT,"
-            + MyBDItemNaming.TodoList_task_Columns.TASK_NOTE + " TEXT,"
-            + MyBDItemNaming.TodoList_task_Columns.TASK_CURRENT_STATE + " TEXT)";
+            + MyBDItemNaming.TodoTaskListTable.TASK_ID + " TEXT,"
+            + MyBDItemNaming.TodoTaskListTable.TASK_TITLE + " TEXT,"
+            + MyBDItemNaming.TodoTaskListTable.TASK_DUE_DATE + " TEXT,"
+            + MyBDItemNaming.TodoTaskListTable.TASK_NOTE + " TEXT,"
+            + MyBDItemNaming.TodoTaskListTable.TASK_STATE + " TEXT)";
 
     public MyDBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -41,8 +41,8 @@ public class MyDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + MyBDItemNaming.Tables.TODO_LIST_GROUP);
-        db.execSQL("DROP TABLE IF EXISTS " + MyBDItemNaming.Tables.TODO_LIST_TASK);
+        db.execSQL("DROP TABLE IF EXISTS " + MyBDItemNaming.Tables.TODO_CATEGORY_LIST);
+        db.execSQL("DROP TABLE IF EXISTS " + MyBDItemNaming.Tables.TODO_TASK_LIST);
         onCreate(db);
     }
 }

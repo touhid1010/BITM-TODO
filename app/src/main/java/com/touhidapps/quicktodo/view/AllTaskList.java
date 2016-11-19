@@ -13,7 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
-import com.touhidapps.quicktodo.todoList.TodoGroupList;
+import com.touhidapps.quicktodo.model.TodoCategory;
 import com.touhidapps.quicktodo.R;
 import com.touhidapps.quicktodo.commonitems.CommonNames;
 import com.touhidapps.quicktodo.customview.MyRecyclerAdapter;
@@ -28,8 +28,8 @@ public class AllTaskList extends AppCompatActivity implements View.OnClickListen
     CardView cardView_deactivatedTaskGroup,
             cardView_todayTask;
 
-    ArrayList<TodoGroupList> nameAndId;
-    TodoGroupList todoGroupList;
+    ArrayList<TodoCategory> nameAndId;
+    TodoCategory todoGroupList;
     TaskCategory myTaskGroup;
     MyRecyclerAdapter adapter;
     String gName;
