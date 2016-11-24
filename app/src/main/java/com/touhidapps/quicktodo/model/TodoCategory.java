@@ -10,6 +10,7 @@ public class TodoCategory {
 
     private long categoryId;
     private String categoryName;
+    private int itemCounterUnderCategory;
 
     public TodoCategory() {
 
@@ -19,9 +20,10 @@ public class TodoCategory {
         this.categoryName = categoryName;
     }
 
-    public TodoCategory(long categoryId, String categoryName) {
+    public TodoCategory(long categoryId, String categoryName, int itemCounterUnderCategory) {
         this.categoryId = categoryId;
         this.categoryName = categoryName;
+        this.itemCounterUnderCategory = itemCounterUnderCategory;
     }
 
     public long getCategoryId() {
@@ -38,5 +40,13 @@ public class TodoCategory {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+    public int getItemCounterUnderCategory() {
+        return itemCounterUnderCategory;
+    }
+
+    public void setItemCounterUnderCategory(int itemCounterUnderCategory) {
+        this.itemCounterUnderCategory = itemCounterUnderCategory;
     }
 }

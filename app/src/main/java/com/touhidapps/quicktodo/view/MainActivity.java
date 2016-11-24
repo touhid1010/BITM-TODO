@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.touhidapps.quicktodo.R;
 import com.touhidapps.quicktodo.customview.MyRecyclerAdapter;
@@ -23,7 +24,8 @@ import com.touhidapps.quicktodo.helper.TaskCategory;
 import com.touhidapps.quicktodo.login.LoginSession;
 import com.touhidapps.quicktodo.model.TodoCategory;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.RunnableFuture;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -32,9 +34,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             cardView_todayTask;
 
     TaskCategory myTaskGroup;
-    ArrayList<TodoCategory> groupNameAndId;
+    List<TodoCategory> groupNameAndId;
     TodoCategory todoGroupList;
     MyRecyclerAdapter adapter;
+    TextView textView_todayTaskAmount, textView_inactiveTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,24 +46,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        myTaskGroup = new TaskCategory(this);
-        groupNameAndId = myTaskGroup.getAllTodoListGroup();
+        TaskCategory taskCategory = new TaskCategory(this);
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView_group);
-        cardView_deactivatedTaskGroup = (CardView) findViewById(R.id.cardView_deactivatedTaskGroup);
-        cardView_todayTask = (CardView) findViewById(R.id.cardView_todayTask);
-        cardView_deactivatedTaskGroup.setOnClickListener(this);
-        cardView_todayTask.setOnClickListener(this);
-        adapter = new MyRecyclerAdapter(this, groupNameAndId); // on Click listener inside it
-        recyclerView.setAdapter(adapter);
-        recyclerView.setHasFixedSize(true);
+        textView_todayTaskAmount = (TextView) findViewById(R.id.textView_todayTaskAmount);
+        textView_inactiveTask = (TextView) findViewById(R.id.textView_inactiveTask);
+        textView_todayTaskAmount.setText("" + taskCategory.countActiveTaskUnderCategory(1));//
+        textView_inactiveTask.setText("" + taskCategory.countInactiveTaskUnderCategory(1));
 
-        //Layout manager for Recycler view
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        /**
+         * Thread used to reduce app opening time
+         * Recycler view and card view need some extra time to open
+         */
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                myTaskGroup = new TaskCategory(MainActivity.this);
+                groupNameAndId = myTaskGroup.getAllCategories();
+                recyclerView = (RecyclerView) findViewById(R.id.recyclerView_group);
+                cardView_deactivatedTaskGroup = (CardView) findViewById(R.id.cardView_deactivatedTaskGroup);
+                cardView_todayTask = (CardView) findViewById(R.id.cardView_todayTask);
+                cardView_deactivatedTaskGroup.setOnClickListener(MainActivity.this);
+                cardView_todayTask.setOnClickListener(MainActivity.this);
+                adapter = new MyRecyclerAdapter(MainActivity.this, groupNameAndId); // on Click listener inside it
+
+                recyclerView.setAdapter(adapter);
+                recyclerView.setHasFixedSize(true);
+                //Layout manager for Recycler view
+                recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+            }
+        }).start();
+
 
         FloatingActionButton fab_addGroup = (FloatingActionButton) findViewById(R.id.fab_addGroup);
         fab_addGroup.setOnClickListener(this);
-
 
     } // End of OnCreate
 

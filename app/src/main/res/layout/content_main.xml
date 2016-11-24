@@ -5,15 +5,11 @@
     android:id="@+id/content_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="16dp"
+    android:layout_marginTop="5dp"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.touhidapps.quicktodo.view.MainActivity"
     tools:showIn="@layout/activity_main">
-
-    <include layout="@layout/my_cardview_layout_today_task" />
-    <include layout="@layout/my_cardview_layout_deactivated_task" />
-
 
     <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/recyclerView_group"

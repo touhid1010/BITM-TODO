@@ -3,7 +3,7 @@
     android:id="@+id/cardView_deactivatedTaskGroup"
     android:layout_width="match_parent"
     android:layout_height="80dp"
-    android:layout_marginBottom="8dp"
+    android:layout_marginBottom="5dp"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     android:background="#ffffff"
@@ -43,7 +43,7 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/list_desc"
+            android:id="@+id/textView_inactiveTask"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_alignBottom="@+id/list_avatar"
@@ -53,7 +53,7 @@
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
-            android:text="1000"
+            android:text="00"
             android:textAppearance="?attr/textAppearanceListItem"
             android:textColor="#212121"
             android:textSize="14sp" />

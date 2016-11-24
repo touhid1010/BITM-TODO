@@ -11,7 +11,7 @@ public class TodoTask {
     private String taskTitle;
     private String taskDueDate;
     private String taskNote;
-    private String taskState;
+    private boolean taskState;
 
     public TodoTask() {
 
@@ -61,11 +61,12 @@ public class TodoTask {
         this.taskNote = taskNote;
     }
 
-    public String getTaskState() {
+    public boolean isTaskState() {
         return taskState;
     }
 
-    public void setTaskState(String taskState) {
+    public void setTaskState(boolean taskState) {
         this.taskState = taskState;
     }
+
 }

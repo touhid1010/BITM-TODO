@@ -9,6 +9,7 @@ import com.touhidapps.quicktodo.model.TodoCategory;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -35,24 +36,26 @@ public class TaskCategory {
         return data;
     }
 
-    public ArrayList<TodoCategory> getAllTodoListGroup() {
-
+    public List<TodoCategory> getAllCategories() {
         sqLiteDatabase = mOpenHelper.getReadableDatabase();
-        ArrayList<TodoCategory> todoListGroups = new ArrayList<>();
-        String todoListGroupQuery = "select * from " + MyBDItemNaming.Tables.TODO_CATEGORY_LIST;
+        List<TodoCategory> todoCategoryList = new ArrayList<>();
+        String todoListGroupQuery = "SELECT * FROM " + MyBDItemNaming.Tables.TODO_CATEGORY_LIST;
         Cursor cursor = sqLiteDatabase.rawQuery(todoListGroupQuery, null);
-        TodoCategory todoListGroup;
+
         if (cursor.moveToFirst()) {
             do {
-                int id = cursor.getInt(cursor.getColumnIndex(MyBDItemNaming.TodoTaskCategoryTable.CATEGORY_ID));
-                String name = cursor.getString(cursor.getColumnIndex("GROUP_NAME"));
-                todoListGroup = new TodoCategory(id, name);
-                todoListGroups.add(todoListGroup);
+
+                long id = Long.parseLong(cursor.getString(0)); // id convert to long from string
+                String name = cursor.getString(1);
+                int amount = countTaskUnderCategory(id); // this counted data do not come from this cursor , come from another cursor
+
+                todoCategoryList.add(new TodoCategory(id, name, amount));
+
             } while (cursor.moveToNext());
         }
         cursor.close();
         sqLiteDatabase.close();
-        return todoListGroups;
+        return todoCategoryList;
     }
 
     public long updateTodoListGroup(TodoCategory todoCategory) {
@@ -74,6 +77,36 @@ public class TaskCategory {
                 new String[]{String.valueOf(id)});
         sqLiteDatabase.close();
         return result;
+    }
+
+    public int countTaskUnderCategory(long catId) {
+        sqLiteDatabase = mOpenHelper.getReadableDatabase();
+        String itemsInCategory = "SELECT COUNT(*) FROM " + MyBDItemNaming.Tables.TODO_TASK_LIST + " WHERE " + MyBDItemNaming.TodoTaskListTable.CATEGORY_ID + " = '" + catId + "'";
+        Cursor cursor = sqLiteDatabase.rawQuery(itemsInCategory, null);
+        cursor.moveToFirst();
+        int i = cursor.getInt(0);
+        cursor.close();
+        return i;
+    }
+
+    public int countActiveTaskUnderCategory(long catActiveId) {
+        sqLiteDatabase = mOpenHelper.getReadableDatabase();
+        String itemsInCategory = "SELECT COUNT(*) FROM " + MyBDItemNaming.Tables.TODO_TASK_LIST + " WHERE " + MyBDItemNaming.TodoTaskListTable.TASK_STATE + " = '" + catActiveId + "'";
+        Cursor cursor = sqLiteDatabase.rawQuery(itemsInCategory, null);
+        cursor.moveToFirst();
+        int i = cursor.getInt(0);
+        cursor.close();
+        return i;
+    }
+
+    public int countInactiveTaskUnderCategory(long catInactiveId) {
+        sqLiteDatabase = mOpenHelper.getReadableDatabase();
+        String itemsInCategory = "SELECT COUNT(*) FROM " + MyBDItemNaming.Tables.TODO_TASK_LIST + " WHERE " + MyBDItemNaming.TodoTaskListTable.TASK_STATE + " = '" + catInactiveId + "'";
+        Cursor cursor = sqLiteDatabase.rawQuery(itemsInCategory, null);
+        cursor.moveToFirst();
+        int i = cursor.getInt(0);
+        cursor.close();
+        return i;
     }
 
 }

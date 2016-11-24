@@ -17,12 +17,13 @@ public class MyDBHelper extends SQLiteOpenHelper {
     private final Context mContext;
 
     private String db_table_todoList_group_query = "CREATE TABLE " + MyBDItemNaming.Tables.TODO_CATEGORY_LIST + " ("
-            + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + MyBDItemNaming.TodoTaskCategoryTable.CATEGORY_NAME + " TEXT NOT NULL)";
 
     private String db_table_todoList_task_query = "CREATE TABLE " + MyBDItemNaming.Tables.TODO_TASK_LIST + " ("
-            + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + MyBDItemNaming.TodoTaskListTable.TASK_ID + " TEXT,"
+            + MyBDItemNaming.TodoTaskListTable.CATEGORY_ID + " TEXT,"
             + MyBDItemNaming.TodoTaskListTable.TASK_TITLE + " TEXT,"
             + MyBDItemNaming.TodoTaskListTable.TASK_DUE_DATE + " TEXT,"
             + MyBDItemNaming.TodoTaskListTable.TASK_NOTE + " TEXT,"
@@ -45,4 +46,5 @@ public class MyDBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + MyBDItemNaming.Tables.TODO_TASK_LIST);
         onCreate(db);
     }
+
 }

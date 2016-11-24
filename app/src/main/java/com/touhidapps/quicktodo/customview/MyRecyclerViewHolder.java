@@ -16,14 +16,14 @@ import com.touhidapps.quicktodo.R;
 
 public class MyRecyclerViewHolder extends RecyclerView.ViewHolder {
 
-    TextView tv1, tv2;
+    TextView tv1, textView_amount;
     ImageView imageView;
     CardView card_view;
 
     public MyRecyclerViewHolder(View itemView) {
         super(itemView);
         tv1 = (TextView) itemView.findViewById(R.id.list_title);
-        tv2 = (TextView) itemView.findViewById(R.id.list_desc);
+        textView_amount = (TextView) itemView.findViewById(R.id.textView_amount);
         imageView = (ImageView) itemView.findViewById(R.id.list_avatar);
         card_view = (CardView) itemView.findViewById(R.id.card_view);
     }

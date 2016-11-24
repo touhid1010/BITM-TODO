@@ -68,16 +68,15 @@ public class AllTaskList extends AppCompatActivity implements View.OnClickListen
                 LayoutInflater li = LayoutInflater.from(AllTaskList.this);
                 View promptsView = li.inflate(R.layout.my_prompts_task, null);
 
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                        AllTaskList.this);
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(AllTaskList.this);
 
-                // set my_prompts.xml to alertdialog builder
+                // Set my_prompts.xml to alertdialog builder
                 alertDialogBuilder.setView(promptsView);
 
                 final EditText userInput = (EditText) promptsView
                         .findViewById(R.id.editTextDialogUserInput);
 
-                // set dialog message
+                // Set dialog message
                 alertDialogBuilder
                         .setCancelable(false)
                         .setPositiveButton("OK",
@@ -102,7 +101,7 @@ public class AllTaskList extends AppCompatActivity implements View.OnClickListen
                 // Create alert dialog
                 AlertDialog alertDialog = alertDialogBuilder.create();
 
-                // show it
+                // Show it
                 alertDialog.show();
 
                 break;

@@ -71,7 +71,6 @@ public class AddNewTask extends AppCompatActivity {
                     }
                 });
 
-
     } // end of onCreate
 
     @Override
@@ -101,4 +100,5 @@ public class AddNewTask extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }
