@@ -23,6 +23,9 @@ public class MyBDItemNaming {
         String CATEGORY_ID = "category_id";
         String TASK_TITLE = "task_title";
         String TASK_DUE_DATE = "task_due_date";
+        String TASK_DUE_TIME = "task_due_time";
+        String TASK_REMINDER_DATE = "task_reminder_date";
+        String TASK_REMINDER_TIME = "task_reminder_time";
         String TASK_NOTE = "task_note";
         String TASK_STATE = "task_state";
     }

@@ -1,47 +1,62 @@
 package com.touhidapps.quicktodo.helper;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import com.touhidapps.quicktodo.commonitems.CommonNames;
+import com.touhidapps.quicktodo.model.TodoTask;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Touhid on 10/28/2016.
  */
 
-public class MyTask {
+public class TaskRepository {
+
     private MyDBHelper mOpenHelper;
     private Context mContext;
     private SQLiteDatabase sqLiteDatabase;
 
-    public MyTask(Context context){
+    public TaskRepository(Context context) {
         mContext = context;
         mOpenHelper = new MyDBHelper(mContext);
     }
 
-//    public long addTodoListTask(TodoTask todoListTask){
-//        sqLiteDatabase = mOpenHelper.getWritableDatabase();
-//        ContentValues contentValues = new ContentValues();
-//        contentValues.put(CommonNames.TodoList_task_Columns.GROUP_ID, todoListTask.getGroup_id());
-//        contentValues.put(TodoListContractor.TodoList_task_Columns.TASK_TITLE, todoListTask.getTitle());
-//        contentValues.put(TodoListContractor.TodoList_task_Columns.TASK_DUE_DATE, todoListTask.getDueDate());
-//        contentValues.put(TodoListContractor.TodoList_task_Columns.TASK_NOTE, todoListTask.getNote());
-//        contentValues.put(TodoListContractor.TodoList_task_Columns.TASK_CURRENT_STATE, todoListTask.getCurrentState());
-//
-//        long data = sqLiteDatabase.insert(TodoListContractor.Tables.TODO_LIST_TASK, null, contentValues);
-//        sqLiteDatabase.close();
-//        return data;
-//    }
-//
-//    public ArrayList<TodoListTask> getAllTodoListTaskGroupWise(long group_id){
+    public long addNewTask(TodoTask todoTask) {
+
+        sqLiteDatabase = mOpenHelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(MyBDItemNaming.TodoTaskListTable.CATEGORY_ID, todoTask.getCategoryId());
+        contentValues.put(MyBDItemNaming.TodoTaskListTable.TASK_TITLE, todoTask.getTaskTitle());
+        contentValues.put(MyBDItemNaming.TodoTaskListTable.TASK_DUE_DATE, String.valueOf(todoTask.getTaskDueDate()));
+        contentValues.put(MyBDItemNaming.TodoTaskListTable.TASK_DUE_TIME, String.valueOf(todoTask.getTaskDueTime()));
+        contentValues.put(MyBDItemNaming.TodoTaskListTable.TASK_REMINDER_DATE, String.valueOf(todoTask.getTaskReminderDate()));
+        contentValues.put(MyBDItemNaming.TodoTaskListTable.TASK_REMINDER_TIME, String.valueOf(todoTask.getTaskReminderTime()));
+        contentValues.put(MyBDItemNaming.TodoTaskListTable.TASK_NOTE, String.valueOf(todoTask.getTaskNote()));
+        contentValues.put(MyBDItemNaming.TodoTaskListTable.TASK_STATE, todoTask.isTaskState());
+
+        long data = sqLiteDatabase.insert(MyBDItemNaming.Tables.TODO_TASK_LIST, null, contentValues);
+        sqLiteDatabase.close();
+        return data;
+
+    }
+
+
+//    public List<TodoTask> getAllTodoListTaskGroupWise(long groupID) {
 //
 //        sqLiteDatabase = mOpenHelper.getReadableDatabase();
 //
-//        String todoListTaskGroupQuery = "select * from " + TodoListContractor.Tables.TODO_LIST_TASK
-//                + " WHERE " + TodoListContractor.TodoList_task_Columns.GROUP_ID + " = ?";
+//        String todoListTaskGroupQuery = "SELECT * FROM " + MyBDItemNaming.Tables.TODO_TASK_LIST
+//                + " WHERE " + MyBDItemNaming.TodoTaskListTable.CATEGORY_ID + " = ?";
 //        Cursor cursor = sqLiteDatabase.rawQuery(todoListTaskGroupQuery,
-//                new String[]{String.valueOf(group_id)});
+//                new String[]{String.valueOf(groupID)});
 //
-//        ArrayList<TodoListTask> todoListTasks = new ArrayList<>();
-//        if(cursor.moveToFirst()){
+//        List<TodoTask> todoListTasks = new ArrayList<>();
+//        if (cursor.moveToFirst()) {
 //            do {
 //                long id = cursor.getLong(
 //                        cursor.getColumnIndex(TodoListContractor.TodoList_task_Columns.TASK_ID));
@@ -62,8 +77,8 @@ public class MyTask {
 //        sqLiteDatabase.close();
 //        return todoListTasks;
 //    }
-//
-//    public TodoListTask singleTodoListTaskGroupWise(long task_id){
+
+//    public TodoListTask singleTodoListTaskGroupWise(long task_id) {
 //
 //        sqLiteDatabase = mOpenHelper.getReadableDatabase();
 //
@@ -71,11 +86,11 @@ public class MyTask {
 //                + " WHERE " + TodoListContractor.TodoList_task_Columns.TASK_ID + " = ? ";
 //        Cursor cursor = sqLiteDatabase.rawQuery(todoListTaskGroupQuery,
 //                new String[]{String.valueOf(task_id)});
-//        if(cursor.getCount() == 0){
+//        if (cursor.getCount() == 0) {
 //            return null;
 //        }
 //        TodoListTask todoListTask;
-//        if(cursor.moveToFirst()){
+//        if (cursor.moveToFirst()) {
 //            long group_id = cursor.getLong(
 //                    cursor.getColumnIndex(TodoListContractor.TodoList_task_Columns.GROUP_ID));
 //            String title = cursor.getString(
@@ -97,7 +112,7 @@ public class MyTask {
 //    }
 //
 //
-//    public long updateTodoListTask(TodoListTask todoListTask){
+//    public long updateTodoListTask(TodoListTask todoListTask) {
 //        sqLiteDatabase = mOpenHelper.getWritableDatabase();
 //        ContentValues contentValues = new ContentValues();
 //        contentValues.put(TodoListContractor.TodoList_task_Columns.TASK_ID, todoListTask.getId());
@@ -114,7 +129,7 @@ public class MyTask {
 //        return result;
 //    }
 //
-//    public long deleteTodoListGroup(long id){
+//    public long deleteTodoListGroup(long id) {
 //        sqLiteDatabase = mOpenHelper.getWritableDatabase();
 //        long result = sqLiteDatabase.delete(TodoListContractor.Tables.TODO_LIST_GROUP,
 //                TodoListContractor.TodoList_group_Columns.GROUP_ID + "=?",

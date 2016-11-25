@@ -23,7 +23,7 @@
             android:layout_height="40dp"
             android:layout_marginLeft="10dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_group" />
+            android:src="@drawable/ic_task" />
 
         <LinearLayout
             android:orientation="vertical"
@@ -32,26 +32,26 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/list_title"
+                android:id="@+id/textView_taskTitle"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight=".5"
                 android:gravity="bottom|left"
                 android:padding="3dp"
-                android:text="Androidwarriors"
+                android:text="My Task"
                 android:textAppearance="?attr/textAppearanceListItem"
                 android:textColor="#353535"
                 android:textSize="17sp" />
 
             <TextView
-                android:id="@+id/list_desc"
+                android:id="@+id/textView_dateTime"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight=".5"
                 android:padding="3dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="1000"
+                android:text="12:00 PM"
                 android:textAppearance="?attr/textAppearanceListItem"
                 android:textColor="#353535"
                 android:textSize="14sp" />

@@ -15,7 +15,7 @@ import com.touhidapps.quicktodo.commonitems.DateTimePicker;
 import java.util.Calendar;
 import java.util.Date;
 
-public class AddNewTask extends AppCompatActivity {
+public class TaskDetails extends AppCompatActivity {
 
     DateTimePicker custom;
     EditText editText_dueDate;

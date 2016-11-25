@@ -19,13 +19,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.touhidapps.quicktodo.R;
-import com.touhidapps.quicktodo.customview.MyRecyclerAdapter;
-import com.touhidapps.quicktodo.helper.TaskCategory;
+import com.touhidapps.quicktodo.commonitems.CommonNames;
+import com.touhidapps.quicktodo.customview.MyRecyclerAdapterCategory;
+import com.touhidapps.quicktodo.helper.TaskCategoryRepository;
 import com.touhidapps.quicktodo.login.LoginSession;
 import com.touhidapps.quicktodo.model.TodoCategory;
 
 import java.util.List;
-import java.util.concurrent.RunnableFuture;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -33,10 +33,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     CardView cardView_deactivatedTaskGroup,
             cardView_todayTask;
 
-    TaskCategory myTaskGroup;
-    List<TodoCategory> groupNameAndId;
+    TaskCategoryRepository categoryRepository;
+    List<TodoCategory> categoryList;
     TodoCategory todoGroupList;
-    MyRecyclerAdapter adapter;
+    MyRecyclerAdapterCategory adapter;
     TextView textView_todayTaskAmount, textView_inactiveTask;
 
     @Override
@@ -46,12 +46,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        TaskCategory taskCategory = new TaskCategory(this);
+        TaskCategoryRepository taskCategoryRepository = new TaskCategoryRepository(this);
 
         textView_todayTaskAmount = (TextView) findViewById(R.id.textView_todayTaskAmount);
         textView_inactiveTask = (TextView) findViewById(R.id.textView_inactiveTask);
-        textView_todayTaskAmount.setText("" + taskCategory.countActiveTaskUnderCategory(1));//
-        textView_inactiveTask.setText("" + taskCategory.countInactiveTaskUnderCategory(1));
+        textView_todayTaskAmount.setText("" + taskCategoryRepository.countTaskStatusUnderCategory("1"));//
+        textView_inactiveTask.setText("" + taskCategoryRepository.countTaskStatusUnderCategory("0"));
 
         /**
          * Thread used to reduce app opening time
@@ -60,14 +60,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         new Thread(new Runnable() {
             @Override
             public void run() {
-                myTaskGroup = new TaskCategory(MainActivity.this);
-                groupNameAndId = myTaskGroup.getAllCategories();
+                categoryRepository = new TaskCategoryRepository(MainActivity.this);
+                categoryList = categoryRepository.getAllCategories();
                 recyclerView = (RecyclerView) findViewById(R.id.recyclerView_group);
                 cardView_deactivatedTaskGroup = (CardView) findViewById(R.id.cardView_deactivatedTaskGroup);
                 cardView_todayTask = (CardView) findViewById(R.id.cardView_todayTask);
                 cardView_deactivatedTaskGroup.setOnClickListener(MainActivity.this);
                 cardView_todayTask.setOnClickListener(MainActivity.this);
-                adapter = new MyRecyclerAdapter(MainActivity.this, groupNameAndId); // on Click listener inside it
+                adapter = new MyRecyclerAdapterCategory(MainActivity.this, categoryList); // on Click listener inside it
 
                 recyclerView.setAdapter(adapter);
                 recyclerView.setHasFixedSize(true);
@@ -75,7 +75,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
             }
         }).start();
-
 
         FloatingActionButton fab_addGroup = (FloatingActionButton) findViewById(R.id.fab_addGroup);
         fab_addGroup.setOnClickListener(this);
@@ -86,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // Save group name to db
     private void saveGroupNameToDb(String name) {
         todoGroupList = new TodoCategory(name);
-        myTaskGroup.addTaskCategory(todoGroupList);
+        categoryRepository.addTaskCategory(todoGroupList);
     }
 
     @Override
@@ -146,18 +145,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 // Get prompts.xml view
                 LayoutInflater li = LayoutInflater.from(MainActivity.this);
-                View promptsView = li.inflate(R.layout.my_prompts, null);
+                View promptsView = li.inflate(R.layout.my_prompts_category, null);
 
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                         MainActivity.this);
 
-                // set my_prompts.xml to alertdialog builder
+                // set my_prompts_category.xmlegory.xml to alertdialog builder
                 alertDialogBuilder.setView(promptsView);
 
                 final EditText userInput = (EditText) promptsView
                         .findViewById(R.id.editTextDialogUserInput);
 
-                // set dialog message
+                // Set dialog message
                 alertDialogBuilder
                         .setCancelable(false)
                         .setPositiveButton("OK",
@@ -167,7 +166,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                         saveGroupNameToDb(userInput.getText().toString());
 
                                         // Auto refresh group list
-                                        groupNameAndId.add(todoGroupList);
+                                        categoryList.add(todoGroupList);
                                         adapter.notifyDataSetChanged();
                                         recyclerView.invalidate();
                                     }
@@ -186,13 +185,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 alertDialog.show();
                 break;
 
-            case R.id.cardView_deactivatedTaskGroup:
-                startActivity(new Intent(getApplicationContext(), AllTaskList.class));
+            case R.id.cardView_todayTask:
+                Intent i = new Intent(getApplicationContext(), AllTaskList.class);
+                i.putExtra(CommonNames.MY_INTENT_NAME_CONTAINS_STATUS_ID, "1");
+                startActivity(i);
                 break;
 
-            case R.id.cardView_todayTask:
-                startActivity(new Intent(getApplicationContext(), AllTaskList.class));
+            case R.id.cardView_deactivatedTaskGroup:
+                Intent intent = new Intent(getApplicationContext(), AllTaskList.class);
+                intent.putExtra(CommonNames.MY_INTENT_NAME_CONTAINS_STATUS_ID, "0");
+                startActivity(intent);
                 break;
+
+
         }
     }
 }

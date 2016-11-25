@@ -41,7 +41,7 @@
             android:label="@string/title_activity_all_task_list"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.AddNewTask"
+            android:name=".view.TaskDetails"
             android:label="@string/title_activity_add_new_task"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

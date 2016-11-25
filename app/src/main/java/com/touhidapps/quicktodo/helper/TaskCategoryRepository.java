@@ -16,13 +16,13 @@ import java.util.List;
  * Created by Touhid on 10/28/2016.
  */
 
-public class TaskCategory {
+public class TaskCategoryRepository {
 
     private MyDBHelper mOpenHelper;
     private Context mContext;
     private SQLiteDatabase sqLiteDatabase;
 
-    public TaskCategory(Context context) {
+    public TaskCategoryRepository(Context context) {
         mContext = context;
         mOpenHelper = new MyDBHelper(mContext);
     }
@@ -81,7 +81,8 @@ public class TaskCategory {
 
     public int countTaskUnderCategory(long catId) {
         sqLiteDatabase = mOpenHelper.getReadableDatabase();
-        String itemsInCategory = "SELECT COUNT(*) FROM " + MyBDItemNaming.Tables.TODO_TASK_LIST + " WHERE " + MyBDItemNaming.TodoTaskListTable.CATEGORY_ID + " = '" + catId + "'";
+        String itemsInCategory = "SELECT COUNT(*) FROM " + MyBDItemNaming.Tables.TODO_TASK_LIST +
+                " WHERE " + MyBDItemNaming.TodoTaskListTable.CATEGORY_ID + " = '" + catId + "'";
         Cursor cursor = sqLiteDatabase.rawQuery(itemsInCategory, null);
         cursor.moveToFirst();
         int i = cursor.getInt(0);
@@ -89,9 +90,10 @@ public class TaskCategory {
         return i;
     }
 
-    public int countActiveTaskUnderCategory(long catActiveId) {
+    public int countTaskStatusUnderCategory(String statusId) {   // statusId "0" means inactive and "1" means active task
         sqLiteDatabase = mOpenHelper.getReadableDatabase();
-        String itemsInCategory = "SELECT COUNT(*) FROM " + MyBDItemNaming.Tables.TODO_TASK_LIST + " WHERE " + MyBDItemNaming.TodoTaskListTable.TASK_STATE + " = '" + catActiveId + "'";
+        String itemsInCategory = "SELECT COUNT(*) FROM " + MyBDItemNaming.Tables.TODO_TASK_LIST + " WHERE " +
+                MyBDItemNaming.TodoTaskListTable.TASK_STATE + " = '" + statusId + "'";
         Cursor cursor = sqLiteDatabase.rawQuery(itemsInCategory, null);
         cursor.moveToFirst();
         int i = cursor.getInt(0);
@@ -99,14 +101,5 @@ public class TaskCategory {
         return i;
     }
 
-    public int countInactiveTaskUnderCategory(long catInactiveId) {
-        sqLiteDatabase = mOpenHelper.getReadableDatabase();
-        String itemsInCategory = "SELECT COUNT(*) FROM " + MyBDItemNaming.Tables.TODO_TASK_LIST + " WHERE " + MyBDItemNaming.TodoTaskListTable.TASK_STATE + " = '" + catInactiveId + "'";
-        Cursor cursor = sqLiteDatabase.rawQuery(itemsInCategory, null);
-        cursor.moveToFirst();
-        int i = cursor.getInt(0);
-        cursor.close();
-        return i;
-    }
 
 }

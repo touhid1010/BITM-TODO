@@ -23,11 +23,16 @@ public class MyDBHelper extends SQLiteOpenHelper {
     private String db_table_todoList_task_query = "CREATE TABLE " + MyBDItemNaming.Tables.TODO_TASK_LIST + " ("
             + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + MyBDItemNaming.TodoTaskListTable.TASK_ID + " TEXT,"
-            + MyBDItemNaming.TodoTaskListTable.CATEGORY_ID + " TEXT,"
+            + MyBDItemNaming.TodoTaskListTable.CATEGORY_ID + " INTEGER,"
             + MyBDItemNaming.TodoTaskListTable.TASK_TITLE + " TEXT,"
             + MyBDItemNaming.TodoTaskListTable.TASK_DUE_DATE + " TEXT,"
+            + MyBDItemNaming.TodoTaskListTable.TASK_DUE_TIME + " TEXT,"
+            + MyBDItemNaming.TodoTaskListTable.TASK_REMINDER_DATE + " TEXT,"
+            + MyBDItemNaming.TodoTaskListTable.TASK_REMINDER_TIME + " TEXT,"
             + MyBDItemNaming.TodoTaskListTable.TASK_NOTE + " TEXT,"
-            + MyBDItemNaming.TodoTaskListTable.TASK_STATE + " TEXT)";
+            + MyBDItemNaming.TodoTaskListTable.TASK_STATE + " TEXT," +
+            "FOREIGN KEY (" + MyBDItemNaming.TodoTaskListTable.CATEGORY_ID +
+            ") REFERENCES " + MyBDItemNaming.Tables.TODO_CATEGORY_LIST + "(" + BaseColumns._ID + "))";
 
     public MyDBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

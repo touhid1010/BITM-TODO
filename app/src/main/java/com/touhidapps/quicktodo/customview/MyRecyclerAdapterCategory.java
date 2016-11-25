@@ -21,43 +21,43 @@ import java.util.List;
  * Created by Touhid on 11/1/2016.
  */
 
-public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerViewHolder> {
+public class MyRecyclerAdapterCategory extends RecyclerView.Adapter<MyRecyclerViewHolderCategory> {
 
     private List<TodoCategory> todoCategoryList;
 
     private Context context;
     private LayoutInflater inflater;
-    MyRecyclerViewHolder viewHolder;
+    MyRecyclerViewHolderCategory viewHolder;
 
-    public MyRecyclerAdapter(Context context, List<TodoCategory> todoCategoryList) {
+    public MyRecyclerAdapterCategory(Context context, List<TodoCategory> todoCategoryList) {
         this.context = context;
         this.todoCategoryList = todoCategoryList;
         inflater = LayoutInflater.from(context);
     }
 
     @Override
-    public MyRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyRecyclerViewHolderCategory onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = inflater.inflate(R.layout.my_cardview_layout_for_task_group_list, parent, false);
 
-        MyRecyclerViewHolder viewHolder1 = new MyRecyclerViewHolder(v);
+        MyRecyclerViewHolderCategory viewHolder1 = new MyRecyclerViewHolderCategory(v);
 
         return viewHolder1;
     }
 
     @Override
-    public void onBindViewHolder(final MyRecyclerViewHolder holder, int position) {
+    public void onBindViewHolder(final MyRecyclerViewHolderCategory holder, int position) {
         holder.tv1.setText(todoCategoryList.get(position).getCategoryName());
         holder.textView_amount.setText("" + todoCategoryList.get(position).getItemCounterUnderCategory());
 //        holder.imageView.setOnClickListener(this);
 //        holder.tv1.setTag(holder);
-        holder.tv1.setTag(todoCategoryList.get(position).getCategoryName());
+        holder.tv1.setTag(todoCategoryList.get(position).getCategoryId());
 
         holder.card_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("touhidd", "onClick: " + holder.tv1.getText());
+                Log.d("touhidd", "onClick: tag: " + holder.tv1.getTag());
                 Intent intent = new Intent(context, AllTaskList.class);
-                intent.putExtra(CommonNames.MY_INTENT_NAME_CONTAINS_GROUP_NAME, holder.tv1.getText().toString());
+                intent.putExtra(CommonNames.MY_INTENT_NAME_CONTAINS_CATEGORY_ID, holder.tv1.getTag().toString());
                 ((Activity) context).startActivity(intent);
             }
         });
